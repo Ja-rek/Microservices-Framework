@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain.AbstractCore", "Doma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesFramework.Domain.AbstractCore", "Domain.AbstractCore\MicroservicesFramework.Domain.AbstractCore\MicroservicesFramework.Domain.AbstractCore.csproj", "{00AC461B-9021-4828-A27B-F57669AA9FFF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{00CC31B9-4314-49DD-973C-8498C6C753A2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesFramework.Logging", "Logging\MicroservicesFramework.Logging\MicroservicesFramework.Logging.csproj", "{BF2386B5-6DDD-4DD5-9614-673F63E3F568}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,10 @@ Global
 		{00AC461B-9021-4828-A27B-F57669AA9FFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00AC461B-9021-4828-A27B-F57669AA9FFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00AC461B-9021-4828-A27B-F57669AA9FFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF2386B5-6DDD-4DD5-9614-673F63E3F568}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF2386B5-6DDD-4DD5-9614-673F63E3F568}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF2386B5-6DDD-4DD5-9614-673F63E3F568}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF2386B5-6DDD-4DD5-9614-673F63E3F568}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +63,7 @@ Global
 		{D7128468-237A-4B0C-B948-939EAC380B38} = {CA4F3700-A180-490B-B788-51FDE7F89826}
 		{28A1DD86-E0A4-4432-ACA4-87AE9CEE40D3} = {CA4F3700-A180-490B-B788-51FDE7F89826}
 		{00AC461B-9021-4828-A27B-F57669AA9FFF} = {DF979115-D12D-4305-BD30-B0ABE7A44A9D}
+		{BF2386B5-6DDD-4DD5-9614-673F63E3F568} = {00CC31B9-4314-49DD-973C-8498C6C753A2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C3F801F3-7EE3-40E5-B99A-AA2902C5CF6D}

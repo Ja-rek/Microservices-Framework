@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>MicroservicesFramework.Mediator</Description>
+    <Authors>JaroslawSzczerbaty.pl</Authors>
+    <AssemblyName>MicroservicesFramework.Mediator</AssemblyName>
+    <Title>MicroservicesFramework.Mediator</Title>
+    <PackageId>MicroservicesFramework.Mediator</PackageId>
+    <PackageTags>MicroservicesFramework.Mediator</PackageTags>
+
+    <LangVersion>Latest</LangVersion>
+    <TargetFramework>net7.0</TargetFramework>
+
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="ForEvolve.FluentValidation.AspNetCore.Http" Version="1.0.26" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.2" />
+    <InternalsVisibleTo Include="MicroservicesFramework.Mediator.Tests" />
+  </ItemGroup>
+
+</Project>

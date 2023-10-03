@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>MicroservicesFramework.Domain.AbstractCore</Description>
+    <Authors>JaroslawSzczerbaty.pl</Authors>
+    <AssemblyName>MicroservicesFramework.Domain.AbstractCore</AssemblyName>
+    <Title>MicroservicesFramework.Domain.AbstractCore</Title>
+    <PackageId>MicroservicesFramework.Domain.AbstractCore</PackageId>
+    <PackageTags>MicroservicesFramework.Domain.AbstractCore</PackageTags>
+
+    <LangVersion>Latest</LangVersion>
+    <TargetFramework>net7.0</TargetFramework>
+
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>

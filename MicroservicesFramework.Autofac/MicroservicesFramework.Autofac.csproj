@@ -1,7 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <Description>MicroservicesFramework.Autofac</Description>
+    <Authors>JaroslawSzczerbaty.pl</Authors>
+    <AssemblyName>MicroservicesFramework.Autofac</AssemblyName>
+    <Title>MicroservicesFramework.Autofac</Title>
+    <PackageId>MicroservicesFramework.Autofac</PackageId>
+    <PackageTags>MicroservicesFramework.Autofac</PackageTags>
+
+    <LangVersion>Latest</LangVersion>
     <TargetFramework>net7.0</TargetFramework>
+
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>

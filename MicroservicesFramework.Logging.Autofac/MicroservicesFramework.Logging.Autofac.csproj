@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>MicroservicesFramework.Autofac</Description>
+    <Description>MicroservicesFramework.Logging.Autofac</Description>
     <Authors>JaroslawSzczerbaty.pl</Authors>
-    <AssemblyName>MicroservicesFramework.Autofac</AssemblyName>
-    <Title>MicroservicesFramework.Autofac</Title>
-    <PackageId>MicroservicesFramework.Autofac</PackageId>
-    <PackageTags>MicroservicesFramework.Autofac</PackageTags>
+    <AssemblyName>MicroservicesFramework.Logging.Autofac</AssemblyName>
+    <Title>MicroservicesFramework.Logging.Autofac</Title>
+    <PackageId>MicroservicesFramework.Logging.Autofac</PackageId>
+    <PackageTags>MicroservicesFramework.Logging.Autofac</PackageTags>
 
     <LangVersion>Latest</LangVersion>
     <TargetFramework>net7.0</TargetFramework>
@@ -19,6 +19,7 @@
     <PackageReference Include="Autofac" Version="7.1.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Autofac.Extras.DynamicProxy" Version="7.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 

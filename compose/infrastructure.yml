@@ -1,0 +1,81 @@
+version: "3.7"
+
+services:
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: on-failure
+    networks:
+      - infrastructure
+    ports:
+      - 3001:3000
+    # volumes:
+    #   - grafana:/var/lib/grafana
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    restart: on-failure
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME=root
+    #   - MONGO_INITDB_ROOT_PASSWORD=secret
+    networks:
+      - infrastructure
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo:/data/db
+
+  prometheus:
+    build: ./prometheus
+    container_name: prometheus
+    restart: on-failure
+    networks:
+      - infrastructure
+    ports:
+      - 9090:9090
+    # volumes:
+    #   - prometheus:/prometheus
+
+  rabbitmq:
+    build: ./rabbitmq
+    container_name: rabbitmq
+    restart: on-failure
+    networks:
+      - infrastructure
+    ports:
+      - 5672:5672
+      - 15672:15672
+      - 15692:15692
+    # volumes: 
+    #   - rabbitmq:/var/lib/rabbitmq
+
+  seq:
+    image: datalust/seq 
+    container_name: seq
+    restart: on-failure
+    environment:
+      - ACCEPT_EULA=Y
+    networks:
+      - infrastructure
+    ports:
+      - 5341:80
+    # volumes: 
+    #   - seq:/data
+
+networks:
+  infrastructure:
+    name: infrastucture-network
+
+volumes:
+  # grafana:
+  #   driver: local
+  mongo:
+    driver: local
+  # prometheus:
+  #   driver: local
+  # rabbitmq:
+  #   driver: local
+  # seq:
+  #   driver: local
+  

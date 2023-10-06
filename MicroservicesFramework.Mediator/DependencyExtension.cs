@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Reflection;
 
@@ -6,14 +7,14 @@ namespace MicroservicesFramework.Mediator;
 
 public static class DependencyInjectionExtension
 {
-    public static IServiceCollection AddMediator(this IServiceCollection services, params Type[] types)
+    public static IServiceCollection UseMediator(this WebApplicationBuilder builder, params Type[] servicesForMediator)
     {
-        foreach (var type in types)
+        foreach (var service in servicesForMediator)
         {
-            TryAddHandlers(type);
+            TryAddHandlers(service);
         }
 
-        return services.AddSingleton<IMediator>(provider => new Mediator(provider));
+        return builder.Services.AddSingleton<IMediator>(provider => new Mediator(provider));
     }
 
     public static void TryAddHandlers(Type serviceType)

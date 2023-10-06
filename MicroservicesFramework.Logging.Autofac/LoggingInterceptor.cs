@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System.Reflection;
 
-namespace MicroservicesFramework.Autofac;
+namespace MicroservicesFramework.Logging.Autofac;
 
 public class LoggingInterceptor : IInterceptor
 {

@@ -3,16 +3,14 @@ using Serilog.Core;
 using Serilog.Events;
 using Serilog.Filters;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Configuration;
 using MicroservicesFramework.Logging.Options;
 
 namespace MicroservicesFramework.Logging;
 
 internal class LoggerConfigurator
 {
-    public static void ConfigureLogger(HostBuilderContext context, LoggerConfiguration config)
+    public static void ConfigureLogger(HostBuilderContext context, LoggerConfiguration config, LoggerOption options)
     {
-        var options = context.Configuration.GetOptions<LoggerOption>("logger");
         if (options is null)
         {
             return;
@@ -123,16 +121,5 @@ internal class LoggerConfigurator
         TryAddEnrichWithProperty("Version", option?.Version);
 
         TryAddEnrichWithProperty("Environment", context.HostingEnvironment.EnvironmentName);
-    }
-}
-
-public static class OptionsExtensions
-{
-    public static TModel GetOptions<TModel>(this IConfiguration configuration, string sectionName)
-        where TModel : new()
-    {
-        var model = new TModel();
-        configuration.GetSection(sectionName).Bind(model);
-        return model;
     }
 }

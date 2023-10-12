@@ -5,16 +5,18 @@ using System.Reflection;
 
 namespace MicroservicesFramework.Mediator;
 
-public static class DependencyInjectionExtension
+public static class MediatorExtensions
 {
-    public static IServiceCollection UseMediator(this WebApplicationBuilder builder, params Type[] servicesForMediator)
+    public static WebApplicationBuilder UseMediator(this WebApplicationBuilder builder, params Type[] servicesForMediator)
     {
         foreach (var service in servicesForMediator)
         {
             TryAddHandlers(service);
         }
 
-        return builder.Services.AddSingleton<IMediator>(provider => new Mediator(provider));
+        builder.Services.AddSingleton<IMediator>(provider => new Mediator(provider));
+
+        return builder;
     }
 
     public static void TryAddHandlers(Type serviceType)

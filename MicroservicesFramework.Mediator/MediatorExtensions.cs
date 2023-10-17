@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Reflection;
 
@@ -7,16 +6,16 @@ namespace MicroservicesFramework.Mediator;
 
 public static class MediatorExtensions
 {
-    public static WebApplicationBuilder UseMediator(this WebApplicationBuilder builder, params Type[] servicesForMediator)
+    public static IServiceCollection AddMediator(this IServiceCollection services, params Type[] servicesForMediator)
     {
         foreach (var service in servicesForMediator)
         {
             TryAddHandlers(service);
         }
 
-        builder.Services.AddSingleton<IMediator>(provider => new Mediator(provider));
+        services.AddSingleton<IMediator>(provider => new Mediator(provider));
 
-        return builder;
+        return services;
     }
 
     public static void TryAddHandlers(Type serviceType)
@@ -44,7 +43,9 @@ public static class MediatorExtensions
             }
 
             var interfaces = messageType.GetInterfaces();
-            if (!(interfaces.Contains(typeof(IQuery<>)) || !interfaces.Contains(typeof(ICommand<>)) || !interfaces.Contains(typeof(ICommand))))
+            if (!(interfaces.Contains(typeof(IQuery<>))
+                || !interfaces.Contains(typeof(ICommand<>))
+                || !interfaces.Contains(typeof(ICommand))))
             {
                 continue;
             }

@@ -10,7 +10,7 @@ public static class MetricsExtensions
 {
     public static WebApplicationBuilder UseMetrics(this WebApplicationBuilder builder)
     {
-        var metricOptions = builder.Configuration.GetOptions<MetricOption>("tracing");
+        var metricOptions = builder.Configuration.GetOptions<MetricOption>("metrics");
 
         if (metricOptions is not null && metricOptions.Enabled)
         {

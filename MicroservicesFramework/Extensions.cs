@@ -12,10 +12,10 @@ public static class Extensions
     public static void UseMicroservicesFramework(WebApplicationBuilder builder, WebApplication app, params Type[] servicesForMediator)
     {
         var metricOptions = app.Configuration.GetOptions<MetricOption>("metrics");
-        var loggerOption = app.Configuration.GetOptions<LoggerOption>("logger");
+        var loggerOption = app.Configuration.GetOptions<LoggerOptions>("logger");
 
-        builder.UseLogger(loggerOption);
-        builder.UseMediator(servicesForMediator);
-        builder.UseMetrics(metricOptions);
+        builder.UseLogger(loggerOption)
+            .AddMediator(servicesForMediator)
+            .UseMetrics(metricOptions);
     }
 }

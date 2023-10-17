@@ -9,7 +9,7 @@ namespace MicroservicesFramework.Logging;
 
 internal class LoggerConfigurator
 {
-    public static void ConfigureLogger(HostBuilderContext context, LoggerConfiguration config, LoggerOption options)
+    public static void ConfigureLogger(HostBuilderContext context, LoggerConfiguration config, LoggerOptions options)
     {
         if (options is null)
         {
@@ -20,12 +20,11 @@ internal class LoggerConfigurator
         ConfigureConsole(options, config);
         ConfigureSaveToFile(options, config);
         ConfigureSeq(options, config);
-        ConfigureSaveToFile(options, config);
         ConfigureExcludePath(options, config);
         ConfigureEnrich(context, config);
     }
 
-    private static void ConfigureLogLevel(LoggerOption options, LoggerConfiguration config)
+    private static void ConfigureLogLevel(LoggerOptions options, LoggerConfiguration config)
     {
         if (string.IsNullOrWhiteSpace(options.Level))
         {
@@ -38,7 +37,7 @@ internal class LoggerConfigurator
         config.MinimumLevel.ControlledBy(loggingLevelSwitch);
     }
 
-    private static void ConfigureConsole(LoggerOption options, LoggerConfiguration config)
+    private static void ConfigureConsole(LoggerOptions options, LoggerConfiguration config)
     {
         var console = options?.Console;
         if (console is not null && console.Enabled is true)
@@ -47,7 +46,7 @@ internal class LoggerConfigurator
         }
     }
 
-    private static void ConfigureSaveToFile(LoggerOption options, LoggerConfiguration config)
+    private static void ConfigureSaveToFile(LoggerOptions options, LoggerConfiguration config)
     {
         var file = options?.File;
         if (file is not null && file.Enabled is true)
@@ -66,7 +65,7 @@ internal class LoggerConfigurator
         }
     }
 
-    private static void ConfigureSeq(LoggerOption options, LoggerConfiguration config)
+    private static void ConfigureSeq(LoggerOptions options, LoggerConfiguration config)
     {
         var seq = options?.Seq;
         var url = seq?.Url;
@@ -90,7 +89,7 @@ internal class LoggerConfigurator
         }
     }
 
-    private static void ConfigureExcludePath(LoggerOption options, LoggerConfiguration config)
+    private static void ConfigureExcludePath(LoggerOptions options, LoggerConfiguration config)
     {
         var excludePaths = options?.ExcludePaths ?? Enumerable.Empty<string>();
         foreach (var excludePath in excludePaths)
@@ -104,7 +103,7 @@ internal class LoggerConfigurator
 
     private static void ConfigureEnrich(HostBuilderContext context, LoggerConfiguration config)
     {
-        var option = context.Configuration.GetOptions<AppOption>("app");
+        var option = new AppOption();//context.Configuration.GetOptions<AppOption>("app");
 
         config.Enrich.FromLogContext();
         var TryAddEnrichWithProperty = (string name, string? value) =>

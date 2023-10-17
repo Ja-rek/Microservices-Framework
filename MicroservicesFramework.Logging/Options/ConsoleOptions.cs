@@ -1,6 +1,6 @@
 ﻿namespace MicroservicesFramework.Logging.Options;
 
-public class ConsoleOption
+public class ConsoleOptions
 {
     public bool Enabled { get; set; }
 }

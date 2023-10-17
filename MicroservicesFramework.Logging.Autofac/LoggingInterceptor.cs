@@ -20,7 +20,6 @@ public class LoggingInterceptor : IInterceptor
         var method = $"{targetType?.Name}.{invocation.Method.Name}({parameters})";
         var @namespace = targetType?.Namespace;
         var arguments = invocation.Arguments;
-        logger.LogWarning("TEST");
 
         logger.LogInformation("Call method '{namespace}.{method}' with parameters '{@parameters}'.", @namespace, method, arguments);
 

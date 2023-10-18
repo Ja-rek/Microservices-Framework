@@ -8,12 +8,12 @@ namespace MicroservicesFramework.Logging;
 
 public static class LoggingExtensions
 {
-    public static IServiceCollection AddLogging(this IServiceCollection services)
+    public static IServiceCollection AddLogger(this IServiceCollection services)
     {
-        return services.AddLogging();
+        return services.AddLogger();
     }
 
-    public static WebApplicationBuilder UseLogging(this WebApplicationBuilder builder)
+    public static WebApplicationBuilder UseLogger(this WebApplicationBuilder builder)
     {
         var options = builder.Configuration.GetOptions<LoggerOptions>("Logger");
          builder.Host.UseSerilog((context, config) => LoggerConfigurator.ConfigureLogger(context, config, options));

@@ -16,9 +16,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MicroservicesFramework.Auth\MicroservicesFramework.Auth.csproj" />
     <ProjectReference Include="..\MicroservicesFramework.Logging\MicroservicesFramework.Logging.csproj" />
     <ProjectReference Include="..\MicroservicesFramework.Mediator\MicroservicesFramework.Mediator.csproj" />
     <ProjectReference Include="..\MicroservicesFramework.Metrics\MicroservicesFramework.Metrics.csproj" />
+    <ProjectReference Include="..\MicroservicesFramework.Tracing.Jaeger.Masstransit\MicroservicesFramework.Tracing.Jaeger.Masstransit.csproj" />
+    <ProjectReference Include="..\MicroservicesFramework.Tracing.Jaeger\MicroservicesFramework.Tracing.Jeager.csproj" />
   </ItemGroup>
 
 </Project>

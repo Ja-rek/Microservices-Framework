@@ -42,10 +42,7 @@ public static class MediatorExtensions
                 continue;
             }
 
-            var interfaces = messageType.GetInterfaces();
-            if (!(interfaces.Contains(typeof(IQuery<>))
-                || !interfaces.Contains(typeof(ICommand<>))
-                || !interfaces.Contains(typeof(ICommand))))
+            if (IsValidMessageType(messageType))
             {
                 continue;
             }
@@ -55,5 +52,14 @@ public static class MediatorExtensions
                 throw new InvalidOperationException($"Message '{messageType.Name}' must have one handler method.");
             }
         }
+    }
+
+    private static bool IsValidMessageType(Type messageType)
+    {
+        var interfaces = messageType.GetInterfaces();
+
+        return interfaces.Contains(typeof(IQuery<>))
+               || interfaces.Contains(typeof(ICommand<>))
+               || interfaces.Contains(typeof(ICommand));
     }
 }

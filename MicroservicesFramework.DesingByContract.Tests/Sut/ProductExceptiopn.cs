@@ -2,21 +2,21 @@
 
 namespace MicroservicesFramework.DesingByContract.Tests.Sut;
 
-internal class ProductExceptiopn : Exception<ProductExceptiopn, Product>
+internal class ProductException : Exception<ProductException, Product>
 {
-    public ProductExceptiopn()
+    public ProductException()
     {
     }
 
-    public ProductExceptiopn(string? message) : base(message)
+    public ProductException(string? message) : base(message)
     {
     }
 
-    public ProductExceptiopn(string? message, Exception? innerException) : base(message, innerException)
+    public ProductException(string? message, Exception? innerException) : base(message, innerException)
     {
     }
 
-    public ProductExceptiopn(SerializationInfo info, StreamingContext context) : base(info, context)
+    public ProductException(SerializationInfo info, StreamingContext context) : base(info, context)
     {
     }
 }

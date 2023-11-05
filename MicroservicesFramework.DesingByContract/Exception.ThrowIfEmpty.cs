@@ -12,7 +12,7 @@ public abstract partial class Exception<TException, TObject> : Exception
         [CallerArgumentExpression("value")] string? valueName = null,
         [CallerArgumentExpression("id")] string? idName = null)
     {
-        var exception = IfEmpty(!value.Any(), id, message, valueName, idName);
+        var exception = IfEmpty<IEnumerable<T>>(!value.Any(), id, message, valueName, idName);
         if (exception != null)
         {
             throw exception;
@@ -25,15 +25,14 @@ public abstract partial class Exception<TException, TObject> : Exception
         [CallerArgumentExpression("value")] string? valueName = null,
         [CallerArgumentExpression("id")] string? idName = null)
     {
-        var exception = IfEmpty(value == string.Empty, id, message, valueName, idName);
+        var exception = IfEmpty<string>(value == string.Empty, id, message, valueName, idName);
         if (exception != null)
         {
             throw exception;
         }
     }
     
-    private static Exception? IfEmpty(bool argument, 
-        object? value,
+    private static Exception? IfEmpty<T>(bool argument, 
         object? id = null,
         string? message = null,
         string? valueName = null,
@@ -41,7 +40,7 @@ public abstract partial class Exception<TException, TObject> : Exception
     {
         if (argument == true)
         {
-            var exception = ExceptionFactory("shouldn't be empty", value, message, id, valueName, idName);
+            var exception = Create<T>("shouldn't be empty", message, id, valueName, idName);
             if (exception != null) 
             { 
                 return exception; 

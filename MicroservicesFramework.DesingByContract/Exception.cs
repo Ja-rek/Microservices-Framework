@@ -39,7 +39,7 @@ public abstract partial class Exception<TException, TObject> : Exception
     {
         if (value) 
         {
-            var exception = ExceptionFactory("shouldn't be true", value, message, id, valueName, idName);
+            var exception = Create<bool>("shouldn't be true", message, id, valueName, idName);
             if (exception != null) 
             { 
                 throw exception; 
@@ -55,7 +55,7 @@ public abstract partial class Exception<TException, TObject> : Exception
     {
         if (value) 
         {
-            var exception = ExceptionFactory("shouldn't be true", value, message, id, valueName, idName);
+            var exception = Create<bool>("shouldn't be true", message, id, valueName, idName);
             if (exception != null) 
             { 
                 throw exception; 
@@ -71,7 +71,7 @@ public abstract partial class Exception<TException, TObject> : Exception
     {
         if (!value) 
         {
-            var exception = ExceptionFactory("shouldn't be false", value, message, id, valueName, idName);
+            var exception = Create<bool>("shouldn't be false", message, id, valueName, idName);
             if (exception != null) 
             { 
                 throw exception; 
@@ -87,8 +87,7 @@ public abstract partial class Exception<TException, TObject> : Exception
     {
         if (argument is null)
         {
-            var exception = ExceptionFactory(message, 
-                $"{objectName} with {idName} {id} not found.");
+            var exception = Create<TObject>($"{objectName} with {idName} {id} not found.", message);
 
             if (exception is not null)
             {
@@ -109,7 +108,7 @@ public abstract partial class Exception<TException, TObject> : Exception
     {
         if (string.IsNullOrEmpty(value))
         {
-            var exception = ExceptionFactory("shouldn't not be null or empty", value, message, id, valueName, idName);
+            var exception = Create<string>("shouldn't not be null or empty", message, id, valueName, idName);
             if (exception != null) 
             { 
                 throw exception; 
@@ -123,9 +122,9 @@ public abstract partial class Exception<TException, TObject> : Exception
         [CallerArgumentExpression("value")] string? valueName = null,
         [CallerArgumentExpression("id")] string? idName = null)
     {
-        if (string.IsNullOrEmpty(value))
+        if (string.IsNullOrWhiteSpace(value))
         {
-            var exception = ExceptionFactory("shouldn't be null, empty or white space", value, message, id, valueName, idName);
+            var exception = Create<string>("shouldn't be null, empty or white space", message, id, valueName, idName);
             if (exception != null) 
             { 
                 throw exception; 
@@ -141,7 +140,7 @@ public abstract partial class Exception<TException, TObject> : Exception
     {
         if (value is null)
         {
-            var exception = ExceptionFactory("shouldn't be null", value, message, id, valueName, idName);
+            var exception = Create<object>("shouldn't be null", message, id, valueName, idName);
             if (exception != null) 
             { 
                 throw exception; 
@@ -157,7 +156,7 @@ public abstract partial class Exception<TException, TObject> : Exception
     {
         if (value is not null)
         {
-            var exception = ExceptionFactory("should be null", value, message, id, valueName, idName);
+            var exception = Create<object>("should be null", message, id, valueName, idName);
             if (exception != null) 
             { 
                 throw exception; 
@@ -173,7 +172,7 @@ public abstract partial class Exception<TException, TObject> : Exception
     {
         if (EqualityComparer<T>.Default.Equals(value, default)) 
         {
-            var exception = ExceptionFactory("shouldn't be default", value, message, id, valueName, idName);
+            var exception = Create<T>("shouldn't be default", message, id, valueName, idName);
             if (exception != null) 
             { 
                 throw exception; 
@@ -189,7 +188,7 @@ public abstract partial class Exception<TException, TObject> : Exception
     {
         if (!EqualityComparer<T>.Default.Equals(value, default)) 
         {
-            var exception = ExceptionFactory("should be default", value, message, id, valueName, idName);
+            var exception = Create<T>("should be default", message, id, valueName, idName);
             if (exception != null) 
             { 
                 throw exception; 
@@ -197,34 +196,38 @@ public abstract partial class Exception<TException, TObject> : Exception
         }
     }
 
-    private static Exception? ExceptionFactory<T>(string? defaultMessageDescription,
-        T? value,
+    private static Exception? Create<T>(string partDefaultMessage,
         string? customeMessage = null,
         object? id = null,
         string? valueName = null,
         string? idName = null)
     {
-        if (defaultMessageDescription is null)
-        {
-            throw new ApplicationException("No passed default exception message.");
-        }
-
-        var showIdPolicy = idName == id?.ToString() ? $"'ID: {id}'" : $"'{idName}: {id}'";
-        var showEntityPolicy = id is not null ? $" in '{objectName}' with {showIdPolicy}" : string.Empty;
-        var showValueNamePolicy = valueName != value?.ToString() ? $"Value of '{valueName}'" : $"Value {valueName}";
-
-        var defaultMessage = $"{showValueNamePolicy}{showEntityPolicy} {defaultMessageDescription}.";
-
-        var message = customeMessage is null
-            ? defaultMessage
-            : customeMessage;
-
-        var exception = (TException?)Activator.CreateInstance(typeof(TException), new object[] { message });
-        if (exception is not null)
-        {
-            return exception;
-        }
-
-        return new ApplicationException("Cannot create exception");
+        return ExceptionFactory<TException>.Create<T>(partDefaultMessage,
+            objectName,
+            customeMessage,
+            id,
+            valueName,
+            idName);
     }
+
+    //private static Exception? ExceptionFactory<T>(string? defaultMessage,
+    //    string? customeMessage = null)
+    //{
+    //    if (defaultMessage is null)
+    //    {
+    //        throw new ApplicationException("No passed default exception message.");
+    //    }
+
+    //    var message = customeMessage is null
+    //        ? defaultMessage
+    //        : customeMessage;
+
+    //    var exception = (TException?)Activator.CreateInstance(typeof(TException), new object[] { message });
+    //    if (exception is not null)
+    //    {
+    //        return exception;
+    //    }
+
+    //    return new ApplicationException("Cannot create exception");
+    //}
 }

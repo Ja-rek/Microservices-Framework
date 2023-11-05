@@ -1,11 +1,11 @@
-using MicroservicesFramework.Auth;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using MicroservicesFramework;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddAuth()
+    .AddMicroservicesFramework()
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
     .AddOcelot();
@@ -14,7 +14,10 @@ builder.Configuration
     .AddJsonFile("ocelot.json");
 
 
+builder.UseMicroservicesFramework();
+
 var app = builder.Build();
+
 
 if (app.Environment.IsDevelopment())
 {
@@ -29,6 +32,6 @@ app.UseCors(builder =>
         .AllowAnyMethod();
 });
 
-app.UseOcelot().Wait();
+await app.UseOcelot();
 
 app.Run();

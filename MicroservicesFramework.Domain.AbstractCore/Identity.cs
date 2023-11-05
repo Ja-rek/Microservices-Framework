@@ -1,20 +1,15 @@
 ﻿namespace MicroservicesFramework.Domain.AbstractCore;
 
-public class Identity : IEquatable<Identity>
+public class Identity<T> : IEquatable<Identity<T>>, IIdentity<T>
 {
-    public Identity()
-    {
-        Value = Guid.NewGuid();
-    }
-
-    public Identity(Guid id)
+    public Identity(T id)
     {
         Value = id;
     }
 
-    public Guid Value { get; }
+    public T Value { get; }
 
-    public bool Equals(Identity? id)
+    public bool Equals(Identity<T>? id)
     {
         if (ReferenceEquals(this, id))
             return true;
@@ -27,7 +22,7 @@ public class Identity : IEquatable<Identity>
 
     public override bool Equals(object? anotherObject)
     {
-        return Equals(anotherObject as Identity);
+        return Equals(anotherObject as Identity<T>);
     }
 
     public override int GetHashCode()
@@ -40,9 +35,9 @@ public class Identity : IEquatable<Identity>
         return GetType().Name + " [Id=" + Value + "]";
     }
 
-    public static implicit operator Guid(Identity identity)
+    public static implicit operator T(Identity<T> identity)
         => identity.Value;
 
-    public static implicit operator Identity(Guid id)
-        => new Identity(id);
+    public static implicit operator Identity<T>(T id)
+        => new Identity<T>(id);
 }

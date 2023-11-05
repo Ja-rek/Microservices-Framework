@@ -11,18 +11,18 @@ namespace MicroservicesFramework;
 
 public static class Extensions
 {
-    public static void AddMicroservicesFramework(IServiceCollection services, params Type[] servicesForMediator)
+    public static IServiceCollection AddMicroservicesFramework(this IServiceCollection services, params Type[] servicesForMediator)
     {
-        services.AddJeager()
+        return services.AddJeager()
             .AddMasstransitToJaegar()
             .AddAuth()
             .AddLogger()
             .AddMediator(servicesForMediator);
     }
 
-    public static void UseMicroservicesFramework(WebApplicationBuilder builder)
+    public static WebApplicationBuilder UseMicroservicesFramework(this WebApplicationBuilder builder)
     {
-        builder.UseMetrics()
+        return builder.UseMetrics()
             .UseLogger();
     }
 }

@@ -13,12 +13,7 @@ public static class MasstransitJeagerExtensions
     {
         var options = services.GetOptions<TracingOptions>("tracing");
 
-        if (options is null 
-            || !options.Enabled
-            || options.Jaeger is null 
-            || !options.Jaeger.Enabled
-            || options.Jaeger.Masstransit is null 
-            || !options.Jaeger.Masstransit.Enabled)
+        if (ShouldSkipConfiguration(options))
         {
             return services;
         }
@@ -42,5 +37,15 @@ public static class MasstransitJeagerExtensions
             );
 
         return services;
+    }
+
+    private static bool ShouldSkipConfiguration(TracingOptions options)
+    {
+        return options is null
+            || !options.Enabled
+            || options.Jaeger is null
+            || !options.Jaeger.Enabled
+            || options.Jaeger.Masstransit is null
+            || !options.Jaeger.Masstransit.Enabled;
     }
 }

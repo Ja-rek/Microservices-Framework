@@ -18,10 +18,7 @@ internal sealed class JeagerConfigurator
 
     public static ISender Sender(JaegerOptions options, int maxPacketSize)
     {
-        if (options.Http is not null
-            && options.Http.Enabled
-            && options.Udp is not null
-            && options.Udp.Enabled)
+        if (HasConflictingSenderOptions(options))
         {
             throw new InvalidOperationException("You should use only one sender protocol.");
         }
@@ -42,7 +39,6 @@ internal sealed class JeagerConfigurator
 
         throw new InvalidOperationException("You should set sender protocol.");
     }
-
 
     public static ISender HttpSender(JaegerHtpOptions options, int maxPacketSize)
     {
@@ -82,5 +78,11 @@ internal sealed class JeagerConfigurator
             "probabilistic" => new ProbabilisticSampler(maxPacketSize),
             _ => new ConstSampler(true),
         };
+    }
+
+    private static bool HasConflictingSenderOptions(JaegerOptions options)
+    {
+        return (options.Http != null && options.Http.Enabled) &&
+               (options.Udp != null && options.Udp.Enabled);
     }
 }

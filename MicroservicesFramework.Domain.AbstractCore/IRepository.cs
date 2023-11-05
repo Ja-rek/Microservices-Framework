@@ -1,8 +1,10 @@
 namespace MicroservicesFramework.Domain.AbstractCore;
 
-public interface IRepository<TEntity> where TEntity : IEntity
+public interface IRepository<TEntity, TIdentity, TId> 
+    where TIdentity : Identity<TId>
+    where TEntity : IEntity<TIdentity, TId>
 {
-    Task<TEntity> GetAsync(Guid id);
+    Task<TEntity> GetAsync(TIdentity id);
     Task DeleteAsync(TEntity vehicle);
     Task SaveAsync(TEntity vehicle);
 }

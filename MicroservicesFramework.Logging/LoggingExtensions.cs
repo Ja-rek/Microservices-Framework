@@ -16,7 +16,9 @@ public static class LoggingExtensions
     public static WebApplicationBuilder UseLogger(this WebApplicationBuilder builder)
     {
         var options = builder.Configuration.GetOptions<LoggerOptions>("Logger");
-         builder.Host.UseSerilog((context, config) => LoggerConfigurator.ConfigureLogger(context, config, options));
+        var appOptions = builder.Configuration.GetOptions<AppOptions>("App");
+
+         builder.Host.UseSerilog((context, config) => LoggerConfigurator.ConfigureLogger(context, config, options, appOptions));
 
         return builder;
     }

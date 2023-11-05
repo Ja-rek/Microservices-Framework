@@ -9,7 +9,10 @@ namespace MicroservicesFramework.Logging;
 
 internal class LoggerConfigurator
 {
-    public static void ConfigureLogger(HostBuilderContext context, LoggerConfiguration config, LoggerOptions options)
+    public static void ConfigureLogger(HostBuilderContext context, 
+        LoggerConfiguration config, 
+        LoggerOptions options, 
+        AppOptions appOptions)
     {
         if (options is null)
         {
@@ -21,7 +24,7 @@ internal class LoggerConfigurator
         ConfigureSaveToFile(options, config);
         ConfigureSeq(options, config);
         ConfigureExcludePath(options, config);
-        ConfigureEnrich(context, config);
+        ConfigureEnrich(context, config, appOptions);
     }
 
     private static void ConfigureLogLevel(LoggerOptions options, LoggerConfiguration config)
@@ -101,10 +104,10 @@ internal class LoggerConfigurator
         }
     }
 
-    private static void ConfigureEnrich(HostBuilderContext context, LoggerConfiguration config)
+    private static void ConfigureEnrich(HostBuilderContext context, 
+        LoggerConfiguration config, 
+        AppOptions options)
     {
-        var option = new AppOption();//context.Configuration.GetOptions<AppOption>("app");
-
         config.Enrich.FromLogContext();
         var TryAddEnrichWithProperty = (string name, string? value) =>
         {
@@ -114,11 +117,12 @@ internal class LoggerConfigurator
             }
         };
 
-        TryAddEnrichWithProperty("Application", option?.Name);
-        TryAddEnrichWithProperty("Instance", option?.Instance);
-        TryAddEnrichWithProperty("Cluster", option?.Cluster);
-        TryAddEnrichWithProperty("Version", option?.Version);
+        TryAddEnrichWithProperty("Application", options?.Name);
+        TryAddEnrichWithProperty("Instance", options?.Instance);
+        TryAddEnrichWithProperty("Cluster", options?.Cluster);
+        TryAddEnrichWithProperty("Version", options?.Version);
 
         TryAddEnrichWithProperty("Environment", context.HostingEnvironment.EnvironmentName);
     }
 }
+

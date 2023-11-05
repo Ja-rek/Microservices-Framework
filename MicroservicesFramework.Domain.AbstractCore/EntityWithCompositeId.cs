@@ -1,6 +1,6 @@
 ﻿namespace MicroservicesFramework.Domain.AbstractCore;
 
-public abstract class EntityWithCompositeId
+public abstract class EntityWithCompositeId : IEntity
 {
     protected abstract IEnumerable<object> GetIdentityComponents();
 

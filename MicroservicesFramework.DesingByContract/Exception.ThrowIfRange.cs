@@ -7,6 +7,18 @@ public abstract partial class Exception<TException, TObject> : Exception
     where TException : Exception
     where TObject : class
 {
+    /// <summary>
+    /// Checks if a value is within a specified range and throws an exception if it is.
+    /// </summary>
+    /// <typeparam name="T">The type of the value to be checked.</typeparam>
+    /// <param name="min">The minimum allowed value in the range (inclusive).</param>
+    /// <param name="max">The maximum allowed value in the range (inclusive).</param>
+    /// <param name="value">The value to be checked against the range.</param>
+    /// <param name="id">An optional identifier for the context in which the check is made (default is null).</param>
+    /// <param name="message">An optional custom error message (default is null).</param>
+    /// <param name="valueName">An optional parameter name (default is determined by the caller).</param>
+    /// <param name="idName">An optional identifier parameter name (default is determined by the caller).</param>
+    /// <exception cref="Exception">Thrown if the value is within the specified range.</exception>
     public static void ThrowIfRange<T>(T min,
         T max,
         T value,

@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MicroservicesFramework.DesingByContract\MicroservicesFramework.DesingByContract.csproj" />
-    <ProjectReference Include="..\MicroservicesFramework.Domain.AbstractCore\MicroservicesFramework.Domain.AbstractCore.csproj" />
+    <ProjectReference Include="..\MicroservicesFramework.Domain.AbstractCore\MicroservicesFramework.Domain.Common.csproj" />
   </ItemGroup>
 
 </Project>

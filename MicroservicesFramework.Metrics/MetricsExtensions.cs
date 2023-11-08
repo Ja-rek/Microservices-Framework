@@ -2,16 +2,25 @@
 using App.Metrics.AspNetCore;
 using App.Metrics.Formatters.Prometheus;
 using MicroservicesFramework.Metrics.Options;
-using MicroservicesFramework.Common;
 using App.Metrics.AspNetCore.Endpoints;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using MicroservicesFramework.Common;
+using Microsoft.Extensions.Configuration;
 
 namespace MicroservicesFramework.Metrics;
 
 public static class MetricsExtensions
 {
-        public static WebApplicationBuilder UseMetrics(this WebApplicationBuilder builder)
+
+    public static IServiceCollection AddMetrics(this IServiceCollection services, ConfigurationManager configuration)
     {
-        var metricOptions = builder.Configuration.GetOptions<MetricOption>("metrics");
+        return services.Configure<MetricsOptions>(configuration.GetSection("Metrics"));
+    }
+
+    public static WebApplicationBuilder UseMetrics(this WebApplicationBuilder builder)
+    {
+        var metricOptions = builder.Services.GetOptions<MetricsOptions>();
 
         if (metricOptions is not null && metricOptions.Enabled)
         {
@@ -19,7 +28,7 @@ public static class MetricsExtensions
             {
                 if (metricOptions.EnablePrometheus)
                 {
-                    options.EndpointOptions = ConfigurePrometheusEndpoint(options.EndpointOptions);
+                    options.EndpointOptions = ConfigurePrometheusEndpoint();
                 }
             });
         }
@@ -27,7 +36,7 @@ public static class MetricsExtensions
         return builder;
     }
 
-    private static Action<MetricEndpointsOptions> ConfigurePrometheusEndpoint(Action<MetricEndpointsOptions> endpointOptions)
+    private static Action<MetricEndpointsOptions> ConfigurePrometheusEndpoint()
     {
         return endpointsOptions =>
         {

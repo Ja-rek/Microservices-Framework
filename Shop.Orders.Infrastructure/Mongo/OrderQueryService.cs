@@ -1,5 +1,7 @@
 ﻿using Microsoft.eShopOnContainers.Services.Ordering.API.Application.Queries;
 using MongoDB.Driver;
+using Shop.Orders.Application.Queries.GetOrder;
+using Shop.Orders.Application.Queries.GetOrderFromUser;
 using Shop.Orders.Application.Queries.Resources;
 using Shop.Orders.Infrastructure.Mongo.Internal;
 
@@ -14,17 +16,17 @@ namespace Shop.Orders.Infrastructure.Mongo
             orderCollection = collectionFactory.Collection<OrderData>("orders");
         }
 
-        public async Task<OrderResource> GetOrderAsync(Guid id)
+        public async Task<OrderResource> GetOrderAsync(GetOrderQuery cmd)
         {
-            var filter = Builders<OrderData>.Filter.Eq(order => order.Id, id);
+            var filter = Builders<OrderData>.Filter.Eq(order => order.Id, cmd.Id);
             var order = await orderCollection.Find(filter).FirstOrDefaultAsync();
 
             return MapToOrderResource(order);
         }
 
-        public async Task<IEnumerable<OrderSummaryResource>> GetOrdersFromUserAsync(Guid userId)
+        public async Task<IEnumerable<OrderSummaryResource>> GetOrdersFromUserAsync(GetOrderFromUserQuery cmd)
         {
-            var filter = Builders<OrderData>.Filter.Eq(order => order.BuyerId, userId);
+            var filter = Builders<OrderData>.Filter.Eq(order => order.BuyerId, cmd.UserId);
             var orders = await orderCollection.Find(filter).ToListAsync();
 
             return orders.Select(MapToOrderSummaryResource);

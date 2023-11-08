@@ -17,8 +17,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="ForEvolve.FluentValidation.AspNetCore.Http" Version="1.0.26" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.12" />
+    <PackageReference Include="ForEvolve.FluentValidation.AspNetCore.Http" Version="1.0.26" />
     <InternalsVisibleTo Include="MicroservicesFramework.Mediator.Tests" />
   </ItemGroup>
 

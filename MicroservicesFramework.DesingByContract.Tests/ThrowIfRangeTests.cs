@@ -7,7 +7,7 @@ public class ThrowIfRangeTests
     private const int ValueInsideRange = 15;
     private const int ValueBelowRange = 5;
     private const int ValueAboveRange = 25;
-    private const string ErrorMessage = "'value' in 'Product' shouldn't be in range 10 - 20.";
+    private const string ErrorMessage = "'value' shouldn't be in range 10 - 20.";
 
     [Test]
     public void ThrowIfRange_ValueInsideRange_ExceptionThrown()

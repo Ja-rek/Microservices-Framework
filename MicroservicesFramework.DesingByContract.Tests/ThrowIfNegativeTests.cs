@@ -5,7 +5,7 @@ public class ThrowIfNegativeTests
     private const int PositiveValue = 10;
     private const int NegativeValue = -10;
     private const int ZeroValue = 0;
-    private const string ErrorMessage = "'value' in 'Product' shouldn't be a negative number.";
+    private const string ErrorMessage = "'value' shouldn't be a negative number.";
 
     [Test]
     public void ThrowIfNegative_ValuePositive_NoExceptionThrown()

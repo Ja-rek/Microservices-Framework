@@ -1,6 +1,7 @@
 ﻿using Jaeger.Samplers;
 using Jaeger.Senders;
 using Jaeger.Senders.Thrift;
+using MicroservicesFramework.Tracing.Jeager;
 using MicroservicesFramework.Trancing.Jaeger.Options;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,14 +10,13 @@ namespace MicroservicesFramework.Trancing.Jaeger;
 
 internal sealed class JeagerConfigurator
 {
-
     public static SenderResolver DefaultSenderResolver(ILoggerFactory loggerFactory)
     {
         return new SenderResolver(loggerFactory)
             .RegisterSenderFactory<ThriftSenderFactory>();
     }
 
-    public static ISender Sender(JaegerOptions options, int maxPacketSize)
+    public static ISender Sender(JaegerOptions options, IHttpSender httpSender)
     {
         if (HasConflictingSenderOptions(options))
         {
@@ -25,7 +25,7 @@ internal sealed class JeagerConfigurator
 
         if (options.Http is not null && options.Http.Enabled)
         {
-            return HttpSender(options.Http, maxPacketSize);
+            return HttpSender(options.Http, options.MaxPacketSize, httpSender);
         }
 
         if (options.Udp is not null && options.Udp.Enabled)
@@ -34,50 +34,49 @@ internal sealed class JeagerConfigurator
             return new UdpSender(
                 udp.Host,
                 udp.Port,
-                maxPacketSize);
+                options.MaxPacketSize);
         }
 
         throw new InvalidOperationException("You should set sender protocol.");
     }
 
-    public static ISender HttpSender(JaegerHtpOptions options, int maxPacketSize)
+    private static ISender HttpSender(JaegerHttpOptions options, int maxPacketSize, IHttpSender httpSender)
     {
         if (string.IsNullOrWhiteSpace(options.Endpoint))
         {
             throw new Exception("You should set HTTP sender endpoint.");
         }
 
-        var builder = new HttpSender.Builder(options.Endpoint);
-
-        builder = builder.WithMaxPacketSize(maxPacketSize);
+        var builder = httpSender.Create(options.Endpoint)
+            .WithMaxPacketSize(maxPacketSize);
 
         if (!string.IsNullOrWhiteSpace(options.Username) && !string.IsNullOrWhiteSpace(options.Password))
         {
-            builder = builder.WithAuth(options.Username, options.Password);
+            builder.WithAuth(options.Username, options.Password);
         }
 
         if (!string.IsNullOrWhiteSpace(options.AuthToken))
         {
-            builder = builder.WithAuth(options.AuthToken);
+            builder.WithAuth(options.AuthToken);
         }
 
         if (!string.IsNullOrWhiteSpace(options.UserAgent))
         {
-            builder = builder.WithUserAgent(options.Username);
+            builder.WithUserAgent(options.UserAgent);
         }
 
         return builder.Build();
     }
 
-    public static ISampler Sampler(JaegerOptions options, int maxPacketSize)
+    public static ISampler Sampler(JaegerOptions options)
     {
         return options.Sampler switch
         {
             "const" => new ConstSampler(true),
-            "rate" => new RateLimitingSampler(maxPacketSize),
-            "probabilistic" => new ProbabilisticSampler(maxPacketSize),
+            "rate" => new RateLimitingSampler(options.MaxPacketSize),
+            "probabilistic" => new ProbabilisticSampler(options.MaxPacketSize),
             _ => new ConstSampler(true),
-        };
+        }; ;
     }
 
     private static bool HasConflictingSenderOptions(JaegerOptions options)

@@ -4,7 +4,7 @@ using Shop.Orders.Domain.Orders;
 
 namespace Shop.Orders.Application.Commands;
 
-public class OrderCommandService
+public class OrderCommandService : IOrderCommandService
 {
     private readonly IOrderRepository orderRepository;
 
@@ -13,27 +13,27 @@ public class OrderCommandService
         this.orderRepository = orderRepository;
     }
 
-    public async Task AwaitingValidationOrder(AwaitingValidationOrderCommand cmd) 
+    public async Task AwaitingValidationOrder(AwaitingValidationOrderCommand cmd)
     {
         OrderException.ThrowIfNull(cmd);
-        
+
         var order = await orderRepository.GetAsync(cmd.OrderId);
         order.AwaitingValidation();
 
         await orderRepository.SaveAsync(order);
     }
 
-    public async Task CancelOrder(CancelOrderCommand cmd) 
+    public async Task CancelOrder(CancelOrderCommand cmd)
     {
         OrderException.ThrowIfNull(cmd);
-        
+
         var order = await orderRepository.GetAsync(cmd.OrderId);
         order.Cancel();
 
         await orderRepository.SaveAsync(order);
     }
 
-    public async Task CreateOrder(CreateOrderCommand cmd) 
+    public async Task CreateOrder(CreateOrderCommand cmd)
     {
         OrderException.ThrowIfNull(cmd);
 

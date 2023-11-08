@@ -5,7 +5,7 @@ public class ThrowIfZeroTests
     private const int ZeroValue = 0;
     private const int NotZeroValue = 69;
     private const int NegativeValue = -10;
-    private const string ErrorMessage = "'value' in 'Product' should be zero.";
+    private const string ErrorMessage = "'value' should be zero.";
 
     [Test]
     public void ThrowIfZero_ValueNotZero_NoExceptionThrown()

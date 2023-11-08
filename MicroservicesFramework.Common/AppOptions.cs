@@ -1,4 +1,4 @@
-﻿namespace MicroservicesFramework.Logging.Options;
+﻿namespace MicroservicesFramework.Common;
 
 public class AppOptions
 {

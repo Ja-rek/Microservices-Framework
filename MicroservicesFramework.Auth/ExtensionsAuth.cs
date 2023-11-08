@@ -1,6 +1,7 @@
 ﻿using MicroservicesFramework.Auth.Options;
 using MicroservicesFramework.Common;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
@@ -8,9 +9,11 @@ namespace MicroservicesFramework.Auth;
 
 public static class ExtensionsAuth
 {
-    public static IServiceCollection AddAuth(this IServiceCollection services)
+    public static IServiceCollection AddAuth(this IServiceCollection services, ConfigurationManager configuration)
     {
-        var options = services.GetOptions<AuthOptions>("auth");
+        services.Configure<AuthOptions>(configuration.GetSection("Auth"));
+
+        var options = services.GetOptions<AuthOptions>();
 
         if (options is null || !options.Enabled)
         {

@@ -5,9 +5,9 @@ namespace Shop.Orders.Infrastructure.Mongo.Internal;
 
 public class MongoCollectionFactory : IMongoCollectionFactory
 {
-    private readonly IOptions<DatabaseSetting> databaseSettings;
+    private readonly IOptions<DatabaseOptions> databaseSettings;
 
-    public MongoCollectionFactory(IOptions<DatabaseSetting> databaseSettings)
+    public MongoCollectionFactory(IOptions<DatabaseOptions> databaseSettings)
     {
         this.databaseSettings = databaseSettings;
     }

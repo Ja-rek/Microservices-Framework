@@ -1,6 +1,6 @@
 ﻿namespace MicroservicesFramework.Trancing.Jaeger.Options;
 
-public sealed class JaegerHtpOptions
+public sealed class JaegerHttpOptions
 {
     public bool Enabled { get; set; }
     public string? Endpoint { get; set; }

@@ -162,7 +162,7 @@ public class ExceptionFactoryTests
                 null,// object? id
                 "OrderId",// string valueName
                 "Id",// string idName
-                "'OrderId' in 'Customer' should be empty.");// string expectedMessage
+                "'OrderId' should be empty.");// string expectedMessage
 
             yield return new TestCaseData("should be empty",// string partDefaultMessage
                 "Test value",// string value
@@ -171,7 +171,7 @@ public class ExceptionFactoryTests
                 "",// object? id
                 "OrderId",// string valueName
                 "Id",// string idName
-                "'OrderId' in 'Customer' should be empty.");// string expectedMessage
+                "'OrderId' should be empty.");// string expectedMessage
 
             yield return new TestCaseData("should be empty",// string partDefaultMessage
                 "Test value",// string value
@@ -180,7 +180,7 @@ public class ExceptionFactoryTests
                 " ",// object? id
                 "OrderId",// string valueName
                 "Id",// string idName
-                "'OrderId' in 'Customer' should be empty.");// string expectedMessage
+                "'OrderId' should be empty.");// string expectedMessage
 
             // value tests
             yield return new TestCaseData("should be empty",// string partDefaultMessage

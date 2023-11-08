@@ -113,7 +113,7 @@ public class Order : IAggregateRoot<OrderId, Guid>
 
     public void AwaitingValidation()
     {
-        OrderException.ThrowIfCannotChangeStatus(Status != OrderStatus.Submitted, 
+        OrderException.ThrowIfCannotChange(Status != OrderStatus.Submitted, 
             OrderStatus.AwaitingValidation, 
             Id);
 
@@ -122,7 +122,7 @@ public class Order : IAggregateRoot<OrderId, Guid>
 
     public void ConfirmStock()
     {
-        OrderException.ThrowIfCannotChangeStatus(Status != OrderStatus.AwaitingValidation, 
+        OrderException.ThrowIfCannotChange(Status != OrderStatus.AwaitingValidation, 
             OrderStatus.StockConfirmed, 
             Id);
 
@@ -132,7 +132,7 @@ public class Order : IAggregateRoot<OrderId, Guid>
 
     public void Pay()
     {
-        OrderException.ThrowIfCannotChangeStatus(Status != OrderStatus.StockConfirmed, 
+        OrderException.ThrowIfCannotChange(Status != OrderStatus.StockConfirmed, 
             OrderStatus.Paid, 
             Id);
 
@@ -142,7 +142,7 @@ public class Order : IAggregateRoot<OrderId, Guid>
 
     public void Shipment()
     {
-        OrderException.ThrowIfCannotChangeStatus(Status != OrderStatus.Paid,
+        OrderException.ThrowIfCannotChange(Status != OrderStatus.Paid,
             OrderStatus.Shipped,
             Id);
 
@@ -152,7 +152,7 @@ public class Order : IAggregateRoot<OrderId, Guid>
 
     public void Cancel()
     {
-        OrderException.ThrowIfCannotChangeStatus(Status == OrderStatus.Paid || Status == OrderStatus.Shipped, 
+        OrderException.ThrowIfCannotChange(Status == OrderStatus.Paid || Status == OrderStatus.Shipped, 
             OrderStatus.Cancelled,
             Id);
 

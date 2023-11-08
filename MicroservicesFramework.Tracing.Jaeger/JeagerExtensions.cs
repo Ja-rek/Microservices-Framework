@@ -7,17 +7,20 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using MicroservicesFramework.Trancing.Jaeger.Options;
 using MicroservicesFramework.Common;
+using MicroservicesFramework.Tracing.Jeager;
+using Microsoft.Extensions.Configuration;
 
 namespace MicroservicesFramework.Trancing.Jaeger;
 
 public static class JeagerExtensions
 {
-    public static IServiceCollection AddJeager(this IServiceCollection services)
+    public static IServiceCollection AddJeager(this IServiceCollection services, ConfigurationManager configuration)
     {
-        var options = services.GetOptions<TracingOptions>("tracing");
+        services.Configure<TracingOptions>(configuration.GetSection("Tracing"));
 
-        if (options is null 
-            || !options.Enabled
+        var options = services.GetOptions<TracingOptions>();
+
+        if (options is null || !options.Enabled
             || options.Jaeger is null 
             || !options.Jaeger.Enabled)
         {
@@ -34,8 +37,9 @@ public static class JeagerExtensions
 
             Configuration.SenderConfiguration.DefaultSenderResolver = JeagerConfigurator.DefaultSenderResolver(loggerFactory);
 
-            var sender = JeagerConfigurator.Sender(jeagerOptions, maxPacketSize);
-            var sampler = JeagerConfigurator.Sampler(jeagerOptions, maxPacketSize);
+            var httpSenderAdapter = new HttpSenderAdapter(); 
+            var sender = JeagerConfigurator.Sender(jeagerOptions, httpSenderAdapter);
+            var sampler = JeagerConfigurator.Sampler(jeagerOptions);
 
             var reporter = new RemoteReporter.Builder()
                 .WithSender(sender)

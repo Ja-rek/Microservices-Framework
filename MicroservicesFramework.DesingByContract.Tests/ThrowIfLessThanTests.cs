@@ -5,7 +5,7 @@ public class ThrowIfLessThanTests
     private const int MinValue = 10;
     private const int LessThanMin = 5;
     private const int GreaterThanMin = 15;
-    private const string ErrorMessage = "'value' in 'Product' shouldn't be less than 10.";
+    private const string ErrorMessage = "'value' shouldn't be less than 10.";
 
     [Test]
     public void ThrowIfLessThan_ValueLessThanMin_ExceptionThrown()

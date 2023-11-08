@@ -5,15 +5,15 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesFramework.DesingByContract", "MicroservicesFramework.DesingByContract\MicroservicesFramework.DesingByContract.csproj", "{7F29792D-35F6-4C8C-B6E4-1E235549BDB1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesFramework.DesingByContract.Tests", "MicroservicesFramework.DesingByContract.Tests\MicroservicesFramework.DesingByContract.Tests.csproj", "{A1B70BD0-8EE3-49C7-86F6-5084687A4882}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesFramework.DesingByContract.UnitTests", "MicroservicesFramework.DesingByContract.Tests\MicroservicesFramework.DesingByContract.UnitTests.csproj", "{A1B70BD0-8EE3-49C7-86F6-5084687A4882}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesFramework.Domain.AbstractCore", "MicroservicesFramework.Domain.AbstractCore\MicroservicesFramework.Domain.AbstractCore.csproj", "{A3A41137-D576-4936-B7F1-40169FD2111C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesFramework.Domain.Common", "MicroservicesFramework.Domain.AbstractCore\MicroservicesFramework.Domain.Common.csproj", "{A3A41137-D576-4936-B7F1-40169FD2111C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesFramework.Logging", "MicroservicesFramework.Logging\MicroservicesFramework.Logging.csproj", "{23D1CD34-4698-46D0-A187-C7880C0DE16F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesFramework.Mediator", "MicroservicesFramework.Mediator\MicroservicesFramework.Mediator.csproj", "{DDFDE458-0679-4D69-9C47-1E31766B5F61}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesFramework.Mediator.Tests", "MicroservicesFramework.Mediator.Tests\MicroservicesFramework.Mediator.Tests.csproj", "{09027406-3D3B-4F06-8FCB-C8F62A509D4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesFramework.Mediator.UnitTests", "MicroservicesFramework.Mediator.Tests\MicroservicesFramework.Mediator.UnitTests.csproj", "{09027406-3D3B-4F06-8FCB-C8F62A509D4E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{46014098-BCE8-4E03-9A1C-4B1C8733735E}"
 EndProject
@@ -62,7 +62,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Orders.Application", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Orders.Infrastructure", "Shop.Orders.Infrastructure\Shop.Orders.Infrastructure.csproj", "{55A7E1BC-3EE0-4BDE-B4A3-E8D6FCBA5CD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Orders.Domain.UnitTests", "Shop.Orders.Domain.UnitTests\Shop.Orders.Domain.UnitTests.csproj", "{0AAC8271-2D41-4D06-9438-AB902C9D1A24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Orders.Domain.UnitTests", "Shop.Orders.Domain.UnitTests\Shop.Orders.Domain.UnitTests.csproj", "{0AAC8271-2D41-4D06-9438-AB902C9D1A24}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesFramework.Tracing.Jeager.UnitTests", "MicroservicesFramework.Tracing.Jeager.UnitTests\MicroservicesFramework.Tracing.Jeager.UnitTests.csproj", "{75DCB93B-ABA7-4F5B-B28E-FE5FBD2B0EC9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesFramework.Tracing.Jaeger.Masstransit.UnitTests", "MicroservicesFramework.Tracing.Jaeger.Masstransit.UnitTests\MicroservicesFramework.Tracing.Jaeger.Masstransit.UnitTests.csproj", "{6C7C8189-93E6-4FD0-AB41-5200BE1E50C9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesFramework.Metrics.UnitTests", "MicroservicesFramework.Metrics.UnitTests\MicroservicesFramework.Metrics.UnitTests.csproj", "{3CC8AB35-99FE-4402-8762-0D0A973C0073}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroservicesFramework.Logging.UnitTests", "MicroservicesFramework.Logging.UnitTests\MicroservicesFramework.Logging.UnitTests.csproj", "{39632830-7D4F-433F-A212-E47A8A10A226}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Orders.Api", "Shop.Orders.Api\Shop.Orders.Api.csproj", "{541D775C-CD36-48D4-A344-030E275BA5C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -146,6 +156,26 @@ Global
 		{0AAC8271-2D41-4D06-9438-AB902C9D1A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AAC8271-2D41-4D06-9438-AB902C9D1A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AAC8271-2D41-4D06-9438-AB902C9D1A24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75DCB93B-ABA7-4F5B-B28E-FE5FBD2B0EC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75DCB93B-ABA7-4F5B-B28E-FE5FBD2B0EC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75DCB93B-ABA7-4F5B-B28E-FE5FBD2B0EC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75DCB93B-ABA7-4F5B-B28E-FE5FBD2B0EC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C7C8189-93E6-4FD0-AB41-5200BE1E50C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C7C8189-93E6-4FD0-AB41-5200BE1E50C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C7C8189-93E6-4FD0-AB41-5200BE1E50C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C7C8189-93E6-4FD0-AB41-5200BE1E50C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CC8AB35-99FE-4402-8762-0D0A973C0073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CC8AB35-99FE-4402-8762-0D0A973C0073}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CC8AB35-99FE-4402-8762-0D0A973C0073}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CC8AB35-99FE-4402-8762-0D0A973C0073}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39632830-7D4F-433F-A212-E47A8A10A226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39632830-7D4F-433F-A212-E47A8A10A226}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39632830-7D4F-433F-A212-E47A8A10A226}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39632830-7D4F-433F-A212-E47A8A10A226}.Release|Any CPU.Build.0 = Release|Any CPU
+		{541D775C-CD36-48D4-A344-030E275BA5C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{541D775C-CD36-48D4-A344-030E275BA5C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{541D775C-CD36-48D4-A344-030E275BA5C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{541D775C-CD36-48D4-A344-030E275BA5C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -162,6 +192,11 @@ Global
 		{4F1FD934-6270-4B7A-9275-DE55EAF51039} = {CF79750E-0C76-44B3-9549-391DE92B30E2}
 		{55A7E1BC-3EE0-4BDE-B4A3-E8D6FCBA5CD4} = {CF79750E-0C76-44B3-9549-391DE92B30E2}
 		{0AAC8271-2D41-4D06-9438-AB902C9D1A24} = {CF79750E-0C76-44B3-9549-391DE92B30E2}
+		{75DCB93B-ABA7-4F5B-B28E-FE5FBD2B0EC9} = {46014098-BCE8-4E03-9A1C-4B1C8733735E}
+		{6C7C8189-93E6-4FD0-AB41-5200BE1E50C9} = {46014098-BCE8-4E03-9A1C-4B1C8733735E}
+		{3CC8AB35-99FE-4402-8762-0D0A973C0073} = {46014098-BCE8-4E03-9A1C-4B1C8733735E}
+		{39632830-7D4F-433F-A212-E47A8A10A226} = {46014098-BCE8-4E03-9A1C-4B1C8733735E}
+		{541D775C-CD36-48D4-A344-030E275BA5C2} = {CF79750E-0C76-44B3-9549-391DE92B30E2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C3F801F3-7EE3-40E5-B99A-AA2902C5CF6D}

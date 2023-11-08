@@ -62,6 +62,6 @@ public class ThrowIfEmptyTests
     }
 
     private string CreateEmptyMessage(string paramName) =>
-        $"'{paramName}' in 'Product' shouldn't be empty.";
+        $"'{paramName}' shouldn't be empty.";
 }
 

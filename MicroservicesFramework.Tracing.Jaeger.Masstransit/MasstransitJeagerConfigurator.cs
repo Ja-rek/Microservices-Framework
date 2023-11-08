@@ -1,12 +1,12 @@
 ﻿using OpenTelemetry.Resources;
-using MicroservicesFramework.Logging.Options;
 using OpenTelemetry.Exporter;
+using MicroservicesFramework.Common;
 
 namespace MicroservicesFramework.Tracing.Jaeger.Masstransit;
 
 internal sealed class MasstransitJeagerConfigurator
 {
-    public static Action<ResourceBuilder> ConfigureResource(AppOptions appOptions)
+    public static Action<ResourceBuilder> ConfigureResource(AppOptions? appOptions)
     {
         if (appOptions is null)
         {
@@ -25,6 +25,11 @@ internal sealed class MasstransitJeagerConfigurator
 
     public static OtlpExportProtocol MapProtocol(string? protocol)
     {
+        if (string.IsNullOrWhiteSpace(protocol))
+        {
+            throw new InvalidOperationException("You should set protocol.");
+        }
+
         if (!Enum.TryParse(protocol, out OtlpExportProtocol protocolEnum))
         {
             throw new InvalidOperationException("You should use 'Grpc' or 'HttpProtobuf' protocol.");
@@ -35,8 +40,11 @@ internal sealed class MasstransitJeagerConfigurator
 
     public static Uri? MapEndpoint(string? endpoint)
     {
-        return endpoint == string.Empty || endpoint == null
-            ? null 
-            : new Uri(endpoint);
+        if (string.IsNullOrWhiteSpace(endpoint))
+        {
+            throw new InvalidOperationException("You should set endpoint.");
+        }
+
+        return new Uri(endpoint);
     }
 }

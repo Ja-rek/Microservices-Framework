@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MicroservicesFramework.Domain.AbstractCore\MicroservicesFramework.Domain.AbstractCore.csproj" />
+    <ProjectReference Include="..\MicroservicesFramework.Domain.AbstractCore\MicroservicesFramework.Domain.Common.csproj" />
     <ProjectReference Include="..\Shop.Orders.Application\Shop.Orders.Application.csproj" />
     <ProjectReference Include="..\Shop.Orders.Domain\Shop.Orders.Domain.csproj" />
   </ItemGroup>

@@ -4,6 +4,7 @@ using Serilog.Events;
 using Serilog.Filters;
 using Microsoft.Extensions.Hosting;
 using MicroservicesFramework.Logging.Options;
+using MicroservicesFramework.Common;
 
 namespace MicroservicesFramework.Logging;
 
@@ -11,8 +12,8 @@ internal class LoggerConfigurator
 {
     public static void ConfigureLogger(HostBuilderContext context, 
         LoggerConfiguration config, 
-        LoggerOptions options, 
-        AppOptions appOptions)
+        LoggerOptions? options, 
+        AppOptions? appOptions)
     {
         if (options is null)
         {
@@ -106,7 +107,7 @@ internal class LoggerConfigurator
 
     private static void ConfigureEnrich(HostBuilderContext context, 
         LoggerConfiguration config, 
-        AppOptions options)
+        AppOptions? options)
     {
         config.Enrich.FromLogContext();
         var TryAddEnrichWithProperty = (string name, string? value) =>

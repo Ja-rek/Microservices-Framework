@@ -6,7 +6,7 @@ public abstract partial class Exception<TException, TObject> : Exception
     where TException : Exception
     where TObject : class
 {
-    public static void ThrowIfCannotChangeStatus(bool when,
+    public static void ThrowIfCannotChange(bool when,
         Enum newStatus,
         object? id = null,
         string? message = null,
@@ -14,13 +14,39 @@ public abstract partial class Exception<TException, TObject> : Exception
         [CallerArgumentExpression("newStatus")] string?  newStatusName = null,
         [CallerArgumentExpression("id")] string? idName = null)
     {
+        if (newStatus is null)
+        {
+            throw new ArgumentException(nameof(wheneName));
+        }
+
+        if (newStatusName is null)
+        {
+            throw new ArgumentException(nameof(wheneName));
+        }
+
+        if (wheneName is null)
+        {
+            throw new ArgumentException(nameof(newStatusName));
+        }
+
         if (when)
         {
-            //var exception = Create($"When '{wheneName}' you cannot change status of {objectName} on '{newStatusName}'", message);
-            //if (exception != null) 
-            //{ 
-            //    throw exception; 
-            //}
+            var idDescription = $" with {idName ?? "ID"}:{id}";
+            var objectDescription = !string.IsNullOrWhiteSpace(objectName) 
+                && !string.IsNullOrWhiteSpace(id?.ToString()) 
+                && !string.IsNullOrWhiteSpace(idName) 
+                    ?  $" in '{objectName}{idDescription}'"
+                    : string.Empty;
+
+            var defaultMessage = $"When '{wheneName}' then you cannot change state to '{newStatusName}'{objectDescription}.";
+            var selectedMessage = message ?? defaultMessage;
+
+            var exception = (TException?)Activator.CreateInstance(typeof(TException), new object[] { selectedMessage });
+
+            if (exception != null) 
+            { 
+                throw exception ?? throw new ApplicationException("Cannot create exception");
+            }
         }
     }
 }

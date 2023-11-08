@@ -14,12 +14,8 @@ public static class ExceptionFactory<TException> where TException : Exception
             throw new ApplicationException("No passed default exception message.");
         }
 
-        var entityWithId = (object? id) => id is not null && !string.IsNullOrWhiteSpace(id.ToString())
-            ? $"'{objectName}' with {GetIdDescription(id, idName)}"
-            : $"'{objectName}'";
-
-        var entityDescription = !string.IsNullOrWhiteSpace(objectName) 
-            ? $" in {entityWithId(id)}"
+        var entityDescription = !string.IsNullOrWhiteSpace(objectName) && !string.IsNullOrWhiteSpace(id?.ToString())
+            ? $" in '{objectName}' with {GetIdDescription(id, idName)}"
             : string.Empty;
 
         var valueDescription = GetValueDescription<T>(valueName);

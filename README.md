@@ -157,7 +157,7 @@ public async Task CancelOrder(CancelOrderCommand cmd)
     await orderRepository.SaveAsync(order);
 }
 ```
-Commands and queries are designed to be used exclusively within a single method.
+Commands and queries are designed to be used exclusively within a **single method**.
 
 ### Add routing straight to services
 You can easily incorporate HTTP routing into services that utilize Mediator by using extension methods from `MicroFusion.Mediator.EndpointsExtensions`. For instance, simply including `app.MapDelete<CancelOrderCommand>("Order")` means that when you access the `/order` endpoint with the HTTP delete method and the `CancelOrderCommand`, Mediator will automatically execute the corresponding method in the appropriate service. 
@@ -171,3 +171,6 @@ app.MapPost<AwaitingValidationOrderCommand>("Order/AwaitingValidation")
 app.MapPost<CreateOrderDraftCommand>("Order/Draf")
 app.MapGet<GetOrderQuery, OrderResource>("Order")
 ```
+
+# Design by Contract
+In our implementation of Design by Contract, we refrain from using traditional "Assert" and "Ensure" methods, as seen in the Eiffel language. Instead, we employ exceptions with self-factory methods, which throw themselves when the specific conditions are met. These methods of exception are specifically designed to support Domain Model, ensuring a more precise error message for each entity, aggregate, or value object."

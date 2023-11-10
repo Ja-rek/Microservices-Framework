@@ -2,18 +2,27 @@
 
 MicroFusion is a versatile set of utility libraries designed to streamline your web application and microservices development. These libraries can be used independently and are valuable tools for addressing common infrastructural concerns, such as routing, tracing, metrics, and more. MicroFusion also helps in supporting Domain-Driven Design (DDD) and Design by Contract principles, saving you time and effort in managing these critical aspects of your projects.
 
-## Basic Configuration
+## Components structure
+
+| Component                                   | Description                                                                                      |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| MicroFusion                                 | All-in-one microservices framework.                                             |
+| MicroFusion.Auth                            | Authentication and authorization using Identity Server.                                             |
+| MicroFusion.DesignByContract                 | Supports the design by contract principle.   |
+| MicroFusion.Domain.Common                    | Common Domain-Driven Design (DDD) functionalities.                       |
+| MicroFusion.Logging                          | Logging with Serilog and Seq.                                                    |
+| MicroFusion.Logging.Autofac                  | Autofac interceptors for automatic logging.                                        |
+| MicroFusion.Mediator                        | Implementation of the mediator pattern.                          |
+| MicroFusion.Metrics                         | Metrics with AppMetrics and Prometheus.                            |
+| MicroFusion.Tracing.Jaeger.Masstransit       | Integrates Jaeger with Masstransit for distributed tracing.           |
+| MicroFusion.Tracing.Jaeger                   | Jaeger tracing.                                            |
+
+
+
+## Basic configuration
 To get started with MicroFusion, you can simply install the all in one package. This all in one package includes all the individual components, which can also be used independently if desired.
 
-All in one package:
 ``dotnet add package MicroFusion``
- 
- components:
-
-`dotnet add package MicroFusion.Logging`
-`dotnet add package MicroFusion.Tracing`
-`dotnet add package MicroFusion.Metrics`
-and so on.
 
 After installing the package, you can utilize the "UseComponent" and "AddComponent" extension methods as needed for specific components, it's enabling you to customize your configuration within the "appsettings.json" file.
 
@@ -174,3 +183,44 @@ app.MapGet<GetOrderQuery, OrderResource>("Order")
 
 # Design by Contract
 In our implementation of Design by Contract, we refrain from using traditional "Assert" and "Ensure" methods, as seen in the Eiffel language. Instead, we employ exceptions with self-factory methods, which throw themselves when the specific conditions are met. These methods of exception are specifically designed to support Domain Model, ensuring a more precise error message for each entity, aggregate, or value object."
+
+**Look on example:**
+
+```csharp
+public class BankAccount
+{
+    public void Deposit(decimal depositAmount)
+    {
+        BankAccountException.ThrowIfNegative(depositAmount, DebitCard); //error message: "'depositAmount' in 'BankAccount' with 'DebitCard: 895f1098-8a80-4539-8648-bf80bf969e3b' should be positive."
+        BankAccountException.ThrowIfNegative(depositAmount, DebitCard, valueName: "Amount of deposit"); //error message: "'Amount of deposit' in 'BankAccount' with 'DebitCard: 895f1098-8a80-4539-8648-bf80bf969e3b' should be positive." 
+        BankAccountException.ThrowIfNegative(depositAmount); //error message: "'depositAmount' should be positive." 
+        BankAccountException.ThrowIfNegative(depositAmount, message: "Custome message."); //error message: "Custome message." 
+
+        Balance += amount;
+    }
+
+    public decimal Balance { get; private set; }
+    public Guid DebitCard { get; }
+}
+```
+**Creating of exception:**
+```csharp
+public class BankAccountException: Exception<BankAccountException, BankAccount>
+{
+    public BankAccountException()
+    {
+    }
+
+    public BankAccountException(string? message) : base(message)
+    {
+    }
+
+    public BankAccountException(string? message, Exception? innerException) : base(message, innerException)
+    {
+    }
+
+    public BankAccountException(SerializationInfo info, StreamingContext context) : base(info, context)
+    {
+    }
+}
+```

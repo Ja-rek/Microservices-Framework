@@ -2,6 +2,9 @@
 
 MicroFusion is a versatile set of utility libraries designed to streamline your web application and microservices development. These libraries can be used independently and are valuable tools for addressing common infrastructural concerns, such as routing, tracing, metrics, and more. MicroFusion also helps in supporting Domain-Driven Design (DDD) and Design by Contract principles, saving you time and effort in managing these critical aspects of your projects.
 
+One of MicroFusion's key strengths is providing a consistent abstraction layer, enabling seamless integration with essential tools such as Jaeger for distributed tracing and Prometheus for metrics collection. This abstraction ensures a standardized approach to incorporating these powerful tools into your microservices architecture.
+By offering this consistent abstraction layer, MicroFusion simplifies the configuration and usage of these external tools, promoting a more straightforward and unified development experience. This, in turn, allows you to focus on building robust and scalable applications without getting bogged down by the complexities of tool integration."
+
 ## Components structure
 
 | Component                                   | Description                                                                                      |
@@ -174,11 +177,11 @@ You can easily incorporate HTTP routing into services that utilize Mediator by u
 When FluentValidations are applied to commands or queries, validation is automatically performed. Users will receive the appropriate validation messages and corresponding HTTP status codes.
 
 ```csharp
-app.MapPost<CreateOrderCommand>("Order")
-app.MapDelete<CancelOrderCommand>("Order")
-app.MapPost<AwaitingValidationOrderCommand>("Order/AwaitingValidation")
-app.MapPost<CreateOrderDraftCommand>("Order/Draf")
-app.MapGet<GetOrderQuery, OrderResource>("Order")
+app.MapPost<CreateOrderCommand>("Order");
+app.MapDelete<CancelOrderCommand>("Order");
+app.MapPost<AwaitingValidationOrderCommand>("Order/AwaitingValidation");
+app.MapPost<CreateOrderDraftCommand>("Order/Draf");
+app.MapGet<GetOrderQuery, OrderResource>("Order");
 ```
 
 # Design by Contract

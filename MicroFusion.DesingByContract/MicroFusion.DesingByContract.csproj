@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>MicroservicesFramework.DesignByContract</Description>
+    <Authors>JaroslawSzczerbaty.pl</Authors>
+    <AssemblyName>MicroservicesFramework.DesignByContract</AssemblyName>
+    <Title>MicroservicesFramework.DesignByContract</Title>
+    <PackageId>MicroservicesFramework.DesignByContract</PackageId>
+    <PackageTags>MicroservicesFramework.DesignByContract</PackageTags>
+
+    <LangVersion>Latest</LangVersion>
+    <TargetFramework>net7.0</TargetFramework>
+
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="MicroFusion.Mediator.Tests" />
+  </ItemGroup>
+
+</Project>

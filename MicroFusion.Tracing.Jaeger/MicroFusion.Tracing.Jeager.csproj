@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenTracing.Contrib.NetCore" Version="0.9.0" />
+    <PackageReference Include="Jaeger" Version="1.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MicroFusion.Common\MicroFusion.Common.csproj" />
+    <InternalsVisibleTo Include="MicroFusion.Tracing.Jeager.UnitTests" />
+  </ItemGroup>
+
+</Project>

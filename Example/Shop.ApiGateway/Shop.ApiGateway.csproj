@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MicroservicesFramework\MicroservicesFramework.csproj" />
+    <ProjectReference Include="..\..\MicroFusion\MicroFusion.csproj" />
   </ItemGroup>
 
 </Project>

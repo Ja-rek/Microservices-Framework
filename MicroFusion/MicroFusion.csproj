@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>MicroservicesFramework</Description>
+    <Authors>JaroslawSzczerbaty.pl</Authors>
+    <AssemblyName>MicroservicesFramework</AssemblyName>
+    <Title>MicroservicesFramework</Title>
+    <PackageId>MicroservicesFramework</PackageId>
+    <PackageTags>MicroservicesFramework</PackageTags>
+
+    <LangVersion>Latest</LangVersion>
+    <TargetFramework>net7.0</TargetFramework>
+
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MicroFusion.Auth\MicroFusion.Auth.csproj" />
+    <ProjectReference Include="..\MicroFusion.Logging\MicroFusion.Logging.csproj" />
+    <ProjectReference Include="..\MicroFusion.Mediator\MicroFusion.Mediator.csproj" />
+    <ProjectReference Include="..\MicroFusion.Metrics\MicroFusion.Metrics.csproj" />
+    <ProjectReference Include="..\MicroFusion.Tracing.Jaeger.Masstransit\MicroFusion.Tracing.Jaeger.Masstransit.csproj" />
+    <ProjectReference Include="..\MicroFusion.Tracing.Jaeger\MicroFusion.Tracing.Jeager.csproj" />
+  </ItemGroup>
+
+</Project>

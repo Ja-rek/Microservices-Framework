@@ -1,11 +1,11 @@
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using MicroservicesFramework;
+using MicroFusion;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddMicroservicesFramework()
+    .AddMicroFusion(builder.Configuration)
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
     .AddOcelot();
@@ -14,7 +14,7 @@ builder.Configuration
     .AddJsonFile("ocelot.json");
 
 
-builder.UseMicroservicesFramework();
+builder.UseMicroFusion();
 
 var app = builder.Build();
 
